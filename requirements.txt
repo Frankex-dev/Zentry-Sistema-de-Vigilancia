@@ -1,0 +1,18 @@
+# Servidor web (Zentry/)
+Django==6.1.1
+djangorestframework==3.18.1
+Pillow==12.3.0            # recorte de la evidencia y pruebas
+psycopg[binary]==3.3.8    # PostgreSQL en Amazon RDS (se activa con el archivo .env)
+boto3[crt]==1.43.125      # Amazon S3 (evidencia), SNS (SMS), SES (correo) y Secrets Manager; [crt] = sesión de `aws login`
+
+# Agente local (agente/ y camaras_virtuales.py)
+requests==2.34.2
+ultralytics==8.4.152
+easyocr==1.7.2
+opencv-python==5.0.0.93
+numpy==2.5.3
+torch==2.14.0
+torchvision==0.29.0
+
+# Solo para volver a entrenar el lector de placas (entrenamiento/ocr_placas/)
+# playwright              # captura escenas del simulador; con Chromium del sistema o `playwright install chromium`
