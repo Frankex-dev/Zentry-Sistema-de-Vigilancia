@@ -1,0 +1,10 @@
+# Caddy pide y renueva solo el certificado HTTPS (Let's Encrypt) para el dominio.
+# DOMINIO se reemplaza al instalar (p. ej. 18-221-247-181.sslip.io).
+DOMINIO {
+	encode gzip
+	handle_path /static/* {
+		root * /opt/zentry/Zentry/staticfiles
+		file_server
+	}
+	reverse_proxy 127.0.0.1:8000
+}

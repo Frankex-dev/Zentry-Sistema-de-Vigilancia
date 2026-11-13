@@ -48,7 +48,14 @@
       <h1>{% block titulo_pagina %}{{ titulo|default:rol }}{% endblock %}</h1>
     </div>
     <div class="derecha">
-      {% if url_api_estado %}{% include 'parciales/campana.html' %}{% endif %}
+      {% if url_api_estado %}
+        {# Botón para encender los avisos con sonido y notificación (lo maneja avisos.js) #}
+        <button type="button" class="boton-avisos" id="boton-avisos" aria-pressed="false"
+                data-sonido="{% static 'zentry/sonidos/alerta.wav' %}" data-icono="{% static 'zentry/img/favicon.svg' %}">
+          {% icono 'volume-x' 20 %}
+        </button>
+        {% include 'parciales/campana.html' %}
+      {% endif %}
       <div class="avatar" aria-hidden="true">{{ iniciales }}</div>
       <div class="usuario">
         <strong>{{ nombre_visible }}</strong>
@@ -83,6 +90,7 @@
 {{ zentry_inicial|json_script:"zentry-inicial" }}
 <script src="{% static 'zentry/js/iconos.js' %}"></script>
 <script src="{% static 'zentry/js/zentry.js' %}"></script>
+<script src="{% static 'zentry/js/avisos.js' %}"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

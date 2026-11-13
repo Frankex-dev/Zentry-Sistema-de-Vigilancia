@@ -513,7 +513,15 @@ def estado_en_vivo(usuario, desde=None):
                    .order_by('creado_en')[:10]):
             texto = (f'Nueva alerta en {ev.alerta.plaza_nombre}' if ev.tipo == EventoAlerta.CREADA
                      else f'Alerta resuelta automáticamente · {ev.alerta.plaza_nombre}')
-            datos['avisos'].append({'texto': texto, 'alerta_id': ev.alerta_id, 'tipo': ev.tipo})
+            datos['avisos'].append({
+                'texto': texto,
+                'alerta_id': ev.alerta_id,
+                'tipo': ev.tipo,
+                # La placa y el resultado los usa avisos.js para el sonido y la notificación del sistema
+                'placa': ev.alerta.placa_visible,
+                'resultado': ev.alerta.resultado,
+                'resultado_texto': ev.alerta.get_resultado_display(),
+            })
     return datos
 
 

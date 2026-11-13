@@ -394,7 +394,9 @@
   if (urlEstado) {
     const vuelta = () => {
       consultarEstado();
-      setTimeout(vuelta, document.hidden ? Math.max(refresco, 15000) : refresco);
+      // En segundo plano se consulta cada 15 s, salvo que los avisos con sonido estén activos (avisos.js)
+      const lento = document.hidden && document.body.dataset.avisos !== 'si';
+      setTimeout(vuelta, lento ? Math.max(refresco, 15000) : refresco);
     };
     setTimeout(vuelta, ultimoEstado ? refresco : 0);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) consultarEstado(); });
